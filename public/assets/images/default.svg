@@ -1,1 +1,34 @@
- 
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f8fafc"/>
+  
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="300" fill="url(#grid)"/>
+  
+  <!-- Center icon -->
+  <g transform="translate(200, 150)">
+    <!-- Code brackets -->
+    <path d="M-40 -20 L-60 0 L-40 20 M40 -20 L60 0 L40 20" 
+          fill="none" stroke="#64748b" stroke-width="3" stroke-linecap="round"/>
+    <!-- Forward slash -->
+    <path d="M-10 -25 L10 25" 
+          fill="none" stroke="#64748b" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Project placeholder text -->
+  <text x="200" y="200" text-anchor="middle" font-family="Arial, sans-serif" 
+        font-size="14" fill="#64748b" font-weight="500">
+    Project Image
+  </text>
+  
+  <!-- Decorative elements -->
+  <circle cx="50" cy="50" r="8" fill="#ddd6fe" opacity="0.6"/>
+  <circle cx="350" cy="50" r="6" fill="#fecaca" opacity="0.6"/>
+  <circle cx="350" cy="250" r="10" fill="#bbf7d0" opacity="0.6"/>
+  <circle cx="50" cy="250" r="7" fill="#fed7aa" opacity="0.6"/>
+</svg> 
