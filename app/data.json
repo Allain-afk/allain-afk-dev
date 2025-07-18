@@ -1,0 +1,195 @@
+{
+    "portfolio": {
+      "name": "Allain",
+      "title": "Full-Stack Developer & Designer",
+      "description": "Passionate developer and designer with expertise in modern web technologies, mobile development, and creative design.",
+      "email": "allain@portfolio.com",
+      "github": "@allain-dev",
+      "linkedin": "@allain-portfolio",
+      "location": "Available Worldwide",
+      "availability": "Open to new opportunities"
+    },
+    "techStack": [
+      {
+        "name": "React",
+        "category": "Frontend",
+        "proficiency": "Expert",
+        "yearsOfExperience": 4
+      },
+      {
+        "name": "Python",
+        "category": "Backend",
+        "proficiency": "Advanced",
+        "yearsOfExperience": 5
+      },
+      {
+        "name": "Flutter",
+        "category": "Mobile",
+        "proficiency": "Advanced",
+        "yearsOfExperience": 3
+      },
+      {
+        "name": "Dart",
+        "category": "Mobile",
+        "proficiency": "Advanced",
+        "yearsOfExperience": 3
+      },
+      {
+        "name": "C++",
+        "category": "Systems",
+        "proficiency": "Intermediate",
+        "yearsOfExperience": 2
+      },
+      {
+        "name": "HTML5",
+        "category": "Frontend",
+        "proficiency": "Expert",
+        "yearsOfExperience": 6
+      },
+      {
+        "name": "CSS3",
+        "category": "Frontend",
+        "proficiency": "Expert",
+        "yearsOfExperience": 6
+      },
+      {
+        "name": "Figma",
+        "category": "Design",
+        "proficiency": "Advanced",
+        "yearsOfExperience": 4
+      },
+      {
+        "name": "Canva",
+        "category": "Design",
+        "proficiency": "Advanced",
+        "yearsOfExperience": 3
+      },
+      {
+        "name": "PHP",
+        "category": "Backend",
+        "proficiency": "Advanced",
+        "yearsOfExperience": 4
+      },
+      {
+        "name": "MySQL",
+        "category": "Database",
+        "proficiency": "Advanced",
+        "yearsOfExperience": 4
+      }
+    ],
+    "projects": [
+      {
+        "id": 1,
+        "title": "E-Commerce Platform",
+        "description": "Full-stack e-commerce solution with user authentication, payment processing, and admin dashboard",
+        "technologies": ["React", "Python", "CSS3", "PostgreSQL"],
+        "category": "Web Development",
+        "status": "Completed",
+        "duration": "3 months",
+        "features": [
+          "User authentication and authorization",
+          "Payment gateway integration",
+          "Admin dashboard",
+          "Product catalog management",
+          "Order tracking system"
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Mobile Task Manager",
+        "description": "Cross-platform mobile app for task management and productivity tracking",
+        "technologies": ["Flutter", "Dart", "Firebase"],
+        "category": "Mobile Development",
+        "status": "Completed",
+        "duration": "2 months",
+        "features": [
+          "Task creation and management",
+          "Progress tracking",
+          "Reminders and notifications",
+          "Team collaboration",
+          "Analytics dashboard"
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Data Analysis Dashboard",
+        "description": "Interactive dashboard for data visualization and business intelligence",
+        "technologies": ["Python", "HTML5", "CSS3", "D3.js"],
+        "category": "Data Science",
+        "status": "Completed",
+        "duration": "4 months",
+        "features": [
+          "Real-time data visualization",
+          "Interactive charts and graphs",
+          "Export functionality",
+          "Multi-user support",
+          "API integration"
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Game Engine",
+        "description": "Custom game engine with physics simulation and rendering pipeline",
+        "technologies": ["C++", "OpenGL", "GLSL"],
+        "category": "Game Development",
+        "status": "In Progress",
+        "duration": "6 months",
+        "features": [
+          "Physics simulation",
+          "3D rendering pipeline",
+          "Asset management system",
+          "Scene editor",
+          "Audio system"
+        ]
+      }
+    ],
+    "achievements": [
+      {
+        "metric": "50+",
+        "description": "Projects Completed",
+        "icon": "target"
+      },
+      {
+        "metric": "5+",
+        "description": "Years Experience",
+        "icon": "award"
+      },
+      {
+        "metric": "20+",
+        "description": "Happy Clients",
+        "icon": "users"
+      },
+      {
+        "metric": "100%",
+        "description": "Client Satisfaction",
+        "icon": "zap"
+      }
+    ],
+    "services": [
+      {
+        "title": "Web Development",
+        "description": "Full-stack web applications using modern technologies",
+        "icon": "code",
+        "technologies": ["React", "Python", "HTML5", "CSS3"]
+      },
+      {
+        "title": "Mobile Development",
+        "description": "Cross-platform mobile apps with native performance",
+        "icon": "smartphone",
+        "technologies": ["Flutter", "Dart", "React Native"]
+      },
+      {
+        "title": "UI/UX Design",
+        "description": "User-centered design and intuitive interfaces",
+        "icon": "palette",
+        "technologies": ["Figma", "Canva", "Adobe XD"]
+      },
+      {
+        "title": "Consulting",
+        "description": "Technical consultation and project planning",
+        "icon": "users",
+        "technologies": ["Strategy", "Architecture", "Best Practices"]
+      }
+    ]
+  }
+  
