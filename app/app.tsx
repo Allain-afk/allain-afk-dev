@@ -18,7 +18,9 @@ import {
   Calendar,
   Coffee,
   Code2,
-  Heart
+  Heart,
+  Moon,
+  Sun
 } from 'lucide-react';
 import { 
   SiReact, 
@@ -62,6 +64,7 @@ const stagger = {
 
 const AllainPortfolio = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -79,6 +82,33 @@ const AllainPortfolio = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Dark mode initialization and persistence
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      setIsDarkMode(true);
+      document.documentElement.classList.add('dark');
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+    
+    if (newDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  };
 
   const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
@@ -211,16 +241,16 @@ const AllainPortfolio = () => {
   const achievements = [
     { number: '2+', label: 'Years of\nexperience' },
     { number: '75,000+', label: 'Lines of\ncode written' },
-    { number: '1k+', label: 'Cups of coffee\nconsumed' },
+    { number: '500+', label: 'Cups of coffee\nconsumed' },
     { number: '100%', label: 'Client Satisfaction' }
   ];
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
       {/* Navigation */}
       <motion.nav 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+          isScrolled ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -232,36 +262,52 @@ const AllainPortfolio = () => {
               className="flex items-center space-x-2"
               whileHover={{ scale: 1.05 }}
             >
-              <div className="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center p-2">
-                <img src="/code-icon.svg" alt="Code" className="w-full h-full filter invert" />
+              <div className="w-10 h-10 bg-gray-900 dark:bg-white rounded-full flex items-center justify-center p-2">
+                <img src="/code-icon.svg" alt="Code" className="w-full h-full filter invert dark:invert-0" />
               </div>
               <span className="font-bold text-xl">Allain</span>
             </motion.div>
             
             <div className="hidden md:flex items-center space-x-8">
-              <button onClick={() => scrollToSection('about')} className="text-gray-600 hover:text-gray-900 transition-colors">
+              <button onClick={() => scrollToSection('about')} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
                 About
               </button>
-              <button onClick={() => scrollToSection('projects')} className="text-gray-600 hover:text-gray-900 transition-colors">
+              <button onClick={() => scrollToSection('projects')} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
                 Projects
               </button>
-              <button onClick={() => scrollToSection('skills')} className="text-gray-600 hover:text-gray-900 transition-colors">
+              <button onClick={() => scrollToSection('skills')} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
                 Skills
               </button>
-              <button onClick={() => scrollToSection('contact')} className="text-gray-600 hover:text-gray-900 transition-colors">
+              <button onClick={() => scrollToSection('contact')} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
                 Contact
               </button>
             </div>
             
-            <Button 
-              className="bg-gray-900 hover:bg-gray-800 text-white"
-              asChild
-            >
-              <a href="/resume.pdf" download="Allain_Resume.pdf">
-                <Download className="w-4 h-4 mr-2" />
-                Resume
-              </a>
-            </Button>
+            <div className="flex items-center space-x-4">
+              <motion.button
+                onClick={toggleDarkMode}
+                className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {isDarkMode ? (
+                  <Sun className="w-5 h-5 text-yellow-500" />
+                ) : (
+                  <Moon className="w-5 h-5 text-gray-600" />
+                )}
+              </motion.button>
+              
+              <Button 
+                className="bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 text-white dark:text-gray-900"
+                asChild
+              >
+                <a href="/resume.pdf" download="Allain_Resume.pdf">
+                  <Download className="w-4 h-4 mr-2" />
+                  Resume
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </motion.nav>
@@ -269,10 +315,10 @@ const AllainPortfolio = () => {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <motion.div style={{ y }} className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100" />
-          <div className="absolute top-20 left-20 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" />
-          <div className="absolute top-40 right-20 w-72 h-72 bg-purple-100 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }} />
-          <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-100 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" style={{ animationDelay: '4s' }} />
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800" />
+          <div className="absolute top-20 left-20 w-72 h-72 bg-blue-100 dark:bg-blue-900/30 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" />
+          <div className="absolute top-40 right-20 w-72 h-72 bg-purple-100 dark:bg-purple-900/30 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }} />
+          <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-100 dark:bg-pink-900/30 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" style={{ animationDelay: '4s' }} />
         </motion.div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
@@ -284,7 +330,7 @@ const AllainPortfolio = () => {
           >
             <div className="space-y-6">
               <motion.div 
-                className="flex items-center justify-center space-x-2 text-gray-600"
+                className="flex items-center justify-center space-x-2 text-gray-600 dark:text-gray-400"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
@@ -303,17 +349,17 @@ const AllainPortfolio = () => {
               </motion.h1>
               
               <motion.p 
-                className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+                className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                I'm a passionate <span className="font-semibold text-gray-800">Full-Stack Developer & Designer</span> who loves crafting digital experiences with modern technologies. 
+                I'm a passionate <span className="font-semibold text-gray-800 dark:text-gray-200">Full-Stack Developer & Designer</span> who loves crafting digital experiences with modern technologies. 
                 I turn ideas into reality through clean code and beautiful design.
               </motion.p>
               
               <motion.div 
-                className="flex items-center justify-center space-x-6 text-sm text-gray-500"
+                className="flex items-center justify-center space-x-6 text-sm text-gray-500 dark:text-gray-400"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
@@ -341,7 +387,7 @@ const AllainPortfolio = () => {
             >
               <Button 
                 size="lg" 
-                className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 text-lg"
+                className="bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 text-white dark:text-gray-900 px-8 py-3 text-lg"
                 onClick={() => scrollToSection('projects')}
               >
                 View My Work
@@ -350,7 +396,7 @@ const AllainPortfolio = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-3 text-lg"
+                className="border-gray-900 dark:border-white text-gray-900 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 px-8 py-3 text-lg"
                 onClick={() => scrollToSection('contact')}
               >
                 Get In Touch
@@ -365,12 +411,12 @@ const AllainPortfolio = () => {
           transition={{ duration: 2, repeat: Infinity }}
           onClick={() => scrollToSection('about')}
         >
-          <ChevronDown className="w-8 h-8 text-gray-400" />
+          <ChevronDown className="w-8 h-8 text-gray-400 dark:text-gray-500" />
         </motion.div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-gray-50">
+      <section id="about" className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div 
             className="text-center mb-16"
@@ -380,7 +426,7 @@ const AllainPortfolio = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl font-bold mb-4">About Me</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               I'm a passionate developer and designer with expertise in modern web technologies, 
               mobile development, and creative design. I love bringing ideas to life through code and design.
             </p>
@@ -396,36 +442,36 @@ const AllainPortfolio = () => {
           >
             <div className="max-w-2xl mx-auto">
               <h3 className="text-2xl font-semibold text-center mb-8">Currently</h3>
-              <div className="bg-white rounded-xl p-6 shadow-sm">
+              <div className="bg-white dark:bg-gray-700 rounded-xl p-6 shadow-sm transition-colors duration-300">
                 <div className="space-y-4">
                   <motion.div 
-                    className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                    className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200"
                     whileHover={{ x: 5 }}
                   >
                     <Calendar className="w-5 h-5 text-blue-500 mt-1" />
                     <div>
-                      <h4 className="font-medium text-gray-900">Building innovative web applications</h4>
-                      <p className="text-gray-600 text-sm">Focusing on React, TypeScript, and modern web technologies</p>
+                      <h4 className="font-medium text-gray-900 dark:text-white">Building innovative web applications</h4>
+                      <p className="text-gray-600 dark:text-gray-300 text-sm">Focusing on React, TypeScript, and modern web technologies</p>
                     </div>
                   </motion.div>
                   <motion.div 
-                    className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                    className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200"
                     whileHover={{ x: 5 }}
                   >
                     <Code2 className="w-5 h-5 text-green-500 mt-1" />
                     <div>
-                      <h4 className="font-medium text-gray-900">Learning advanced development patterns</h4>
-                      <p className="text-gray-600 text-sm">Exploring microservices, cloud architecture, and performance optimization</p>
+                      <h4 className="font-medium text-gray-900 dark:text-white">Learning advanced development patterns</h4>
+                      <p className="text-gray-600 dark:text-gray-300 text-sm">Exploring microservices, cloud architecture, and performance optimization</p>
                     </div>
                   </motion.div>
                   <motion.div 
-                    className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                    className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200"
                     whileHover={{ x: 5 }}
                   >
                     <Heart className="w-5 h-5 text-red-500 mt-1" />
                     <div>
-                      <h4 className="font-medium text-gray-900">Open to new opportunities</h4>
-                      <p className="text-gray-600 text-sm">Looking for exciting projects and collaborations</p>
+                      <h4 className="font-medium text-gray-900 dark:text-white">Open to new opportunities</h4>
+                      <p className="text-gray-600 dark:text-gray-300 text-sm">Looking for exciting projects and collaborations</p>
                     </div>
                   </motion.div>
                 </div>
@@ -442,9 +488,9 @@ const AllainPortfolio = () => {
           >
             {achievements.map((achievement, index) => (
               <motion.div key={index} variants={fadeInUp} className="text-center">
-                <div className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
-                  <div className="text-3xl font-bold text-gray-900 mb-2">{achievement.number}</div>
-                  <div className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">{achievement.label}</div>
+                <div className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-300">
+                  <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{achievement.number}</div>
+                  <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line">{achievement.label}</div>
                 </div>
               </motion.div>
             ))}
@@ -453,7 +499,7 @@ const AllainPortfolio = () => {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 bg-white">
+      <section id="skills" className="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div 
             className="text-center mb-16"
@@ -463,7 +509,7 @@ const AllainPortfolio = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl font-bold mb-4">Tech Stack</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Technologies and tools I use to bring projects to life
             </p>
           </motion.div>
@@ -483,7 +529,7 @@ const AllainPortfolio = () => {
                 className="group cursor-pointer"
                 title={tech.name}
               >
-                <div className={`w-16 h-16 ${tech.color} rounded-2xl flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300 group-hover:scale-105`}>
+                <div className={`w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300 group-hover:scale-105`}>
                   {tech.icon}
                 </div>
               </motion.div>
@@ -493,7 +539,7 @@ const AllainPortfolio = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-32 bg-gray-50">
+      <section id="projects" className="py-32 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-8">
           <motion.div 
             className="text-center mb-24"
@@ -503,7 +549,7 @@ const AllainPortfolio = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl font-bold mb-4">Featured Projects</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               A selection of my recent work showcasing different technologies and design approaches
             </p>
           </motion.div>
@@ -517,7 +563,7 @@ const AllainPortfolio = () => {
           >
             {projects.map((project, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="h-full hover:shadow-2xl transition-all duration-300 group border-0 shadow-lg bg-white rounded-2xl overflow-hidden">
+                <Card className="h-full hover:shadow-2xl transition-all duration-300 group border-0 shadow-lg bg-white dark:bg-gray-700 rounded-2xl overflow-hidden">
                   <div className="relative overflow-hidden">
                     <img 
                       src={project.image} 
@@ -543,17 +589,17 @@ const AllainPortfolio = () => {
                   </div>
                   <CardHeader className="p-10">
                     <div className="flex items-start justify-between mb-6">
-                      <CardTitle className="text-3xl font-bold leading-tight">{project.title}</CardTitle>
-                      <span className="text-sm text-gray-500 font-medium bg-gray-100 px-4 py-2 rounded-full">{project.year}</span>
+                      <CardTitle className="text-3xl font-bold leading-tight text-gray-900 dark:text-white">{project.title}</CardTitle>
+                      <span className="text-sm text-gray-500 dark:text-gray-400 font-medium bg-gray-100 dark:bg-gray-600 px-4 py-2 rounded-full">{project.year}</span>
                     </div>
-                    <CardDescription className="text-lg leading-relaxed text-gray-600">
+                    <CardDescription className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                       {project.description}
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="px-10 pb-10">
                     <div className="flex flex-wrap gap-4">
                       {project.tech.map((tech, techIndex) => (
-                        <Badge key={techIndex} variant="secondary" className="text-sm px-4 py-2 font-medium">
+                        <Badge key={techIndex} variant="secondary" className="text-sm px-4 py-2 font-medium bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200">
                           {tech}
                         </Badge>
                       ))}
@@ -567,7 +613,7 @@ const AllainPortfolio = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20">
+      <section id="contact" className="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div 
             className="text-center mb-16"
@@ -577,7 +623,7 @@ const AllainPortfolio = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl font-bold mb-4">Let's Work Together</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Have a project in mind? I'd love to hear from you and discuss how we can bring your ideas to life.
             </p>
           </motion.div>
@@ -589,57 +635,60 @@ const AllainPortfolio = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <Card className="p-8">
-                <h3 className="text-2xl font-bold mb-6">Send me a message</h3>
+              <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Send me a message</h3>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium mb-2">Name</label>
+                      <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Name</label>
                       <Input 
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
                         placeholder="Your name"
+                        className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-2">Email</label>
+                      <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Email</label>
                       <Input 
                         name="email"
                         type="email"
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="your@email.com"
+                        className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                         required
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Subject</label>
+                    <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Subject</label>
                     <Input 
                       name="subject"
                       value={formData.subject}
                       onChange={handleInputChange}
                       placeholder="Project discussion"
+                      className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Message</label>
+                    <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Message</label>
                     <Textarea 
                       name="message"
                       value={formData.message}
                       onChange={handleInputChange}
                       placeholder="Tell me about your project..."
-                      className="min-h-[120px]"
+                      className="min-h-[120px] bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                       required
                     />
                   </div>
                   <Button 
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gray-900 hover:bg-gray-800 text-white disabled:opacity-50"
+                    className="w-full bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 text-white dark:text-gray-900 disabled:opacity-50"
                   >
                     {isSubmitting ? 'Opening Email Client...' : 'Send Message'}
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -656,22 +705,22 @@ const AllainPortfolio = () => {
               className="space-y-8"
             >
               <div>
-                <h3 className="text-2xl font-bold mb-6">Get in touch</h3>
-                <p className="text-gray-600 mb-8">
+                <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Get in touch</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-8">
                   I'm always open to discussing new opportunities, creative projects, or just having a chat about technology and design.
                 </p>
                 
                 <div className="space-y-4">
                   <a 
                     href="mailto:allainralphlegaspi@gmail.com"
-                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 group"
+                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 group"
                   >
-                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-gray-200 transition-colors">
-                      <Mail className="w-5 h-5 text-gray-600" />
+                    <div className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center group-hover:bg-gray-200 dark:group-hover:bg-gray-600 transition-colors">
+                      <Mail className="w-5 h-5 text-gray-600 dark:text-gray-300" />
                     </div>
                     <div>
-                      <div className="font-medium group-hover:text-gray-900">Email</div>
-                      <div className="text-gray-600 group-hover:text-blue-600 transition-colors">allainralphlegaspi@gmail.com</div>
+                      <div className="font-medium group-hover:text-gray-900 dark:group-hover:text-white text-gray-800 dark:text-gray-200">Email</div>
+                      <div className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">allainralphlegaspi@gmail.com</div>
                     </div>
                   </a>
                   
@@ -679,14 +728,14 @@ const AllainPortfolio = () => {
                     href="https://github.com/Allain-afk"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 group"
+                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 group"
                   >
-                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-gray-200 transition-colors">
-                      <Github className="w-5 h-5 text-gray-600" />
+                    <div className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center group-hover:bg-gray-200 dark:group-hover:bg-gray-600 transition-colors">
+                      <Github className="w-5 h-5 text-gray-600 dark:text-gray-300" />
                     </div>
                     <div>
-                      <div className="font-medium group-hover:text-gray-900">GitHub</div>
-                      <div className="text-gray-600 group-hover:text-blue-600 transition-colors">@Allain-afk</div>
+                      <div className="font-medium group-hover:text-gray-900 dark:group-hover:text-white text-gray-800 dark:text-gray-200">GitHub</div>
+                      <div className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">@Allain-afk</div>
                     </div>
                   </a>
                   
@@ -694,39 +743,39 @@ const AllainPortfolio = () => {
                     href="https://www.linkedin.com/in/allain-afk"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 group"
+                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 group"
                   >
-                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-gray-200 transition-colors">
-                      <Linkedin className="w-5 h-5 text-gray-600" />
+                    <div className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center group-hover:bg-gray-200 dark:group-hover:bg-gray-600 transition-colors">
+                      <Linkedin className="w-5 h-5 text-gray-600 dark:text-gray-300" />
                     </div>
                     <div>
-                      <div className="font-medium group-hover:text-gray-900">LinkedIn</div>
-                      <div className="text-gray-600 group-hover:text-blue-600 transition-colors">www.linkedin.com/in/allain-afk</div>
+                      <div className="font-medium group-hover:text-gray-900 dark:group-hover:text-white text-gray-800 dark:text-gray-200">LinkedIn</div>
+                      <div className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">www.linkedin.com/in/allain-afk</div>
                     </div>
                   </a>
                 </div>
               </div>
               
-              <Separator />
+              <Separator className="bg-gray-200 dark:bg-gray-700" />
               
               <div>
-                <h4 className="font-semibold mb-4">Available for</h4>
+                <h4 className="font-semibold mb-4 text-gray-900 dark:text-white">Available for</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="flex items-center space-x-2">
                     <Zap className="w-4 h-4 text-blue-500" />
-                    <span className="text-sm">Web Development</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">Web Development</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Smartphone className="w-4 h-4 text-green-500" />
-                    <span className="text-sm">Mobile Apps</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">Mobile Apps</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Palette className="w-4 h-4 text-purple-500" />
-                    <span className="text-sm">UI/UX Design</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">UI/UX Design</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Users className="w-4 h-4 text-orange-500" />
-                    <span className="text-sm">Consulting</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">Consulting</span>
                   </div>
                 </div>
               </div>
@@ -736,18 +785,18 @@ const AllainPortfolio = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-gray-900 dark:bg-gray-950 text-white py-12 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center p-2">
+              <div className="w-10 h-10 bg-white dark:bg-gray-200 rounded-full flex items-center justify-center p-2">
                 <img src="/code-icon.svg" alt="Code" className="w-full h-full" />
               </div>
               <span className="font-bold text-xl">Allain</span>
             </div>
             
             <div className="text-center md:text-right">
-              <p className="text-gray-400 mb-2">© 2025 Allain-afk. All rights reserved.</p>
+              <p className="text-gray-400 dark:text-gray-500 mb-2">© 2025 Allain-afk. All rights reserved.</p>
             </div>
           </div>
         </div>
@@ -755,7 +804,7 @@ const AllainPortfolio = () => {
 
       {/* Scroll to Top Button */}
       <motion.button
-        className="fixed bottom-8 right-8 bg-gray-900 text-white p-3 rounded-full shadow-lg hover:bg-gray-800 transition-colors"
+        className="fixed bottom-8 right-8 bg-gray-900 dark:bg-white text-white dark:text-gray-900 p-3 rounded-full shadow-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
         onClick={scrollToTop}
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: isScrolled ? 1 : 0, scale: isScrolled ? 1 : 0 }}

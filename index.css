@@ -73,4 +73,19 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Dark mode transition styles */
+@layer base {
+  html {
+    transition: color-scheme 0.3s ease;
+  }
+  
+  html.dark {
+    color-scheme: dark;
+  }
+  
+  html:not(.dark) {
+    color-scheme: light;
+  }
 } 
