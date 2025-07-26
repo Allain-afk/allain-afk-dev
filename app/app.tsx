@@ -336,7 +336,7 @@ const AllainPortfolio = () => {
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
                 <MapPin className="w-4 h-4" />
-                <span>Available worldwide</span>
+                <span>PH</span>
               </motion.div>
               
               <motion.h1 
@@ -366,15 +366,15 @@ const AllainPortfolio = () => {
               >
                 <div className="flex items-center space-x-1">
                   <Coffee className="w-4 h-4" />
-                  <span>Coffee enthusiast</span>
+                  <span>Caffeine Addict</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <Code2 className="w-4 h-4" />
-                  <span>Code lover</span>
+                  <span>Casual Coder</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <Heart className="w-4 h-4" />
-                  <span>Problem solver</span>
+                  <span>UI/UX Designer</span>
                 </div>
               </motion.div>
             </div>
