@@ -9,6 +9,7 @@
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
@@ -26,5 +27,13 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["app", "components", "lib"]
+  "include": [
+    "app/**/*", 
+    "components/**/*", 
+    "lib/**/*", 
+    "main.tsx", 
+    "index.html",
+    "vite.config.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
 } 
