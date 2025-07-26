@@ -488,9 +488,9 @@ const AllainPortfolio = () => {
           >
             {achievements.map((achievement, index) => (
               <motion.div key={index} variants={fadeInUp} className="text-center">
-                <div className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-300">
+                <div className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-300 h-32 flex flex-col justify-center items-center">
                   <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{achievement.number}</div>
-                  <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line">{achievement.label}</div>
+                  <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line text-center">{achievement.label}</div>
                 </div>
               </motion.div>
             ))}
