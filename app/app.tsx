@@ -86,9 +86,9 @@ const AllainPortfolio = () => {
   // Dark mode initialization and persistence
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    // Default to light mode unless user has explicitly chosen dark mode
+    if (savedTheme === 'dark') {
       setIsDarkMode(true);
       document.documentElement.classList.add('dark');
     } else {
@@ -205,7 +205,7 @@ const AllainPortfolio = () => {
       description: 'A comprehensive library management system with book tracking, member management, borrowing system, and administrative dashboard. Features real-time availability status and automated notifications.',
       tech: ['PHP', 'MySQL', 'HTML5', 'CSS3', 'JavaScript'],
       image: '/assets/images/projects/Library-Management-System.png',
-      link: 'https://github.com/Allain-afk/library-management',
+      link: 'https://github.com/Allain-afk/Book-King',
       status: 'Live',
       year: '2024'
     },
@@ -214,7 +214,7 @@ const AllainPortfolio = () => {
       description: 'My initial portfolio website showcasing clean design principles and responsive layouts. Built with modern web technologies and smooth animations to create an engaging user experience.',
       tech: ['HTML5', 'CSS3', 'JavaScript', 'Figma'],
       image: '/assets/images/projects/First-Portfolio-Design.png',
-      link: 'https://github.com/Allain-afk/first-portfolio',
+      link: 'https://allain-afk.github.io/AllainAutobiography/',
       status: 'Live',
       year: '2023'
     },
@@ -223,7 +223,7 @@ const AllainPortfolio = () => {
       description: 'Professional trading platform website with real-time market data, user dashboard, and comprehensive trading tools. Features modern UI/UX design and responsive layout.',
       tech: ['React', 'TypeScript', 'Tailwind CSS', 'Node.js'],
       image: '/assets/images/projects/JackMar-Trading-Website.png',
-      link: 'https://github.com/Allain-afk/jackmar-trading',
+      link: 'https://maricel-jackson.github.io/trading/',
       status: 'Live',
       year: '2024'
     },
@@ -232,7 +232,7 @@ const AllainPortfolio = () => {
       description: 'Digital solution for laundry business operations including order tracking, customer management, pricing calculator, and service scheduling with automated notifications.',
       tech: ['PHP', 'MySQL', 'HTML5', 'CSS3', 'JavaScript'],
       image: '/assets/images/projects/Laundry-Management-System.png',
-      link: 'https://github.com/Allain-afk/laundry-management',
+      link: 'https://github.com/Allain-afk/Laundry-Management-System',
       status: 'Live',
       year: '2024'
     }
@@ -573,10 +573,12 @@ const AllainPortfolio = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="absolute top-8 left-8">
                       <Badge 
-                        variant={project.status === 'Live' ? 'default' : project.status === 'In Development' ? 'secondary' : 'outline'}
-                        className="text-sm px-4 py-2 font-medium"
+                        variant="default"
+                        className="text-sm px-4 py-2 font-medium bg-gray-900/90 text-white hover:bg-gray-900 transition-colors cursor-pointer flex items-center gap-2"
+                        onClick={() => window.open(project.link, '_blank')}
                       >
-                        {project.status}
+                        <Github className="w-4 h-4" />
+                        GitHub
                       </Badge>
                     </div>
                     <Button 
