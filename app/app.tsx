@@ -200,6 +200,24 @@ const AllainPortfolio = () => {
   ];
 
   const projects = [
+        {
+      title: 'Develop Kreativity (UI/UX Designer)',
+      description: 'Develop Kreativity is a platform for creatives to showcase their work and connect with others. Currently a UI/UX Designer for the team.',
+      tech: ['Figma'],
+      image: '/assets/images/projects/Develop-Kreativity.png',
+      link: 'https://www.developkreativity.com/',
+      status: 'Employed',
+      year: '2025'
+    },
+    {
+      title: 'Owens and Associates (Website Redesign)',
+      description: 'Redesigned Owens and Associates website to improve user experience and functionality.',
+      tech: ['Figma'],
+      image: '/assets/images/projects/Owens-Website-Redesign.png',
+      link: 'https://www.figma.com/design/41uORbAgrsqOvZOcNblkQa/Owens-and-Associates-Banner-Only?node-id=1-2&p=f&t=BQ0QXAPrDxnDQXYo-0',
+      status: 'Completed',
+      year: '2025'
+    },
     {
       title: 'Library Management System',
       description: 'A comprehensive library management system with book tracking, member management, borrowing system, and administrative dashboard. Features real-time availability status and automated notifications.',
@@ -235,7 +253,7 @@ const AllainPortfolio = () => {
       link: 'https://github.com/Allain-afk/Laundry-Management-System',
       status: 'Live',
       year: '2024'
-    }
+    },
   ];
 
   const achievements = [
@@ -302,9 +320,9 @@ const AllainPortfolio = () => {
                 className="bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 text-white dark:text-gray-900"
                 asChild
               >
-                <a href="/resume.pdf" download="Allain_Resume.pdf">
+                <a href="/Resume-Updated.pdf" download="Allain-Resume.pdf">
                   <Download className="w-4 h-4 mr-2" />
-                  Resume
+                  Download Resume
                 </a>
               </Button>
             </div>
@@ -569,6 +587,12 @@ const AllainPortfolio = () => {
                       src={project.image} 
                       alt={project.title}
                       className="w-full h-80 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        const target = e.currentTarget as HTMLImageElement;
+                        if (target.src !== '/assets/images/default.svg') {
+                          target.src = '/assets/images/default.svg';
+                        }
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="absolute top-8 left-8">
