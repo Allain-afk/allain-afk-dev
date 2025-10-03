@@ -20,7 +20,18 @@ import {
   Code2,
   Heart,
   Moon,
-  Sun
+  Sun,
+  Sparkles,
+  Target,
+  TrendingUp,
+  Award,
+  Globe,
+  Rocket,
+  Star,
+  Brain,
+  Lightbulb,
+  Layers,
+  Cpu
 } from 'lucide-react';
 import { 
   SiReact, 
@@ -49,7 +60,6 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Separator } from '@/components/ui/separator';
 
 // Animation variants
 const fadeInUp = {
@@ -277,24 +287,27 @@ const AllainPortfolio = () => {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <motion.div 
-              className="flex items-center space-x-2"
+              className="flex items-center space-x-3"
               whileHover={{ scale: 1.05 }}
             >
-              <div className="w-10 h-10 bg-gray-900 dark:bg-white rounded-full flex items-center justify-center p-2">
-                <img src="/code-icon.svg" alt="Code" className="w-full h-full filter invert dark:invert-0" />
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                <Code2 className="w-6 h-6 text-white" />
               </div>
-              <span className="font-bold text-xl">Allain</span>
+              <div className="flex flex-col">
+                <span className="font-bold text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Allain</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">Full-Stack Developer</span>
+              </div>
             </motion.div>
             
             <div className="hidden md:flex items-center space-x-8">
               <button onClick={() => scrollToSection('about')} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
                 About
               </button>
-              <button onClick={() => scrollToSection('projects')} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
-                Projects
-              </button>
               <button onClick={() => scrollToSection('skills')} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
                 Skills
+              </button>
+              <button onClick={() => scrollToSection('projects')} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
+                Projects
               </button>
               <button onClick={() => scrollToSection('contact')} className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
                 Contact
@@ -334,9 +347,15 @@ const AllainPortfolio = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <motion.div style={{ y }} className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800" />
-          <div className="absolute top-20 left-20 w-72 h-72 bg-blue-100 dark:bg-blue-900/30 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" />
-          <div className="absolute top-40 right-20 w-72 h-72 bg-purple-100 dark:bg-purple-900/30 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }} />
-          <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-100 dark:bg-pink-900/30 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" style={{ animationDelay: '4s' }} />
+          <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse" />
+          <div className="absolute top-40 right-20 w-96 h-96 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse" style={{ animationDelay: '2s' }} />
+          <div className="absolute bottom-20 left-1/2 w-96 h-96 bg-gradient-to-r from-green-400/20 to-emerald-400/20 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse" style={{ animationDelay: '4s' }} />
+          
+          {/* Floating Elements */}
+          <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-blue-500/30 rounded-full animate-bounce" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-1/3 right-1/3 w-3 h-3 bg-purple-500/30 rounded-full animate-bounce" style={{ animationDelay: '2.5s' }} />
+          <div className="absolute bottom-1/4 left-1/3 w-5 h-5 bg-green-500/30 rounded-full animate-bounce" style={{ animationDelay: '3.5s' }} />
+          <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-pink-500/30 rounded-full animate-bounce" style={{ animationDelay: '4.5s' }} />
         </motion.div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
@@ -358,22 +377,29 @@ const AllainPortfolio = () => {
               </motion.div>
               
               <motion.h1 
-                className="text-5xl md:text-7xl font-bold leading-tight"
+                className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Allain</span>
+                Hi, I'm{' '}
+                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient bg-300% bg-[length:300%_300%]">
+                  Allain
+                </span>
               </motion.h1>
               
               <motion.p 
-                className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
+                className="text-xl md:text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                I'm a passionate <span className="font-semibold text-gray-800 dark:text-gray-200">Full-Stack Developer & Designer</span> who loves crafting digital experiences with modern technologies. 
-                I turn ideas into reality through clean code and beautiful design.
+                I'm a passionate{' '}
+                <span className="font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Full-Stack Developer & Designer
+                </span>{' '}
+                who loves crafting digital experiences with cutting-edge technologies. 
+                I transform ideas into reality through clean code and innovative design.
               </motion.p>
               
               <motion.div 
@@ -398,25 +424,27 @@ const AllainPortfolio = () => {
             </div>
             
             <motion.div 
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-8"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               <Button 
                 size="lg" 
-                className="bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 text-white dark:text-gray-900 px-8 py-3 text-lg"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-4 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
                 onClick={() => scrollToSection('projects')}
               >
+                <Sparkles className="w-5 h-5 mr-2" />
                 View My Work
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-gray-900 dark:border-white text-gray-900 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 px-8 py-3 text-lg"
+                className="border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 px-10 py-4 text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 backdrop-blur-sm"
                 onClick={() => scrollToSection('contact')}
               >
+                <Mail className="w-5 h-5 mr-2" />
                 Get In Touch
               </Button>
             </motion.div>
@@ -450,68 +478,191 @@ const AllainPortfolio = () => {
             </p>
           </motion.div>
           
-          {/* Currently Section */}
+          {/* Bento Box Grid */}
           <motion.div 
-            className="mb-16"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <div className="max-w-2xl mx-auto">
-              <h3 className="text-2xl font-semibold text-center mb-8">Currently</h3>
-              <div className="bg-white dark:bg-gray-700 rounded-xl p-6 shadow-sm transition-colors duration-300">
-                <div className="space-y-4">
-                  <motion.div 
-                    className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200"
-                    whileHover={{ x: 5 }}
-                  >
-                    <Calendar className="w-5 h-5 text-blue-500 mt-1" />
-                    <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white">Building innovative web applications</h4>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm">Focusing on React, TypeScript, and modern web technologies</p>
-                    </div>
-                  </motion.div>
-                  <motion.div 
-                    className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200"
-                    whileHover={{ x: 5 }}
-                  >
-                    <Code2 className="w-5 h-5 text-green-500 mt-1" />
-                    <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white">Learning advanced development patterns</h4>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm">Exploring microservices, cloud architecture, and performance optimization</p>
-                    </div>
-                  </motion.div>
-                  <motion.div 
-                    className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-200"
-                    whileHover={{ x: 5 }}
-                  >
-                    <Heart className="w-5 h-5 text-red-500 mt-1" />
-                    <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white">Open to new opportunities</h4>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm">Looking for exciting projects and collaborations</p>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-          
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
             variants={stagger}
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
           >
-            {achievements.map((achievement, index) => (
-              <motion.div key={index} variants={fadeInUp} className="text-center">
-                <div className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-300 h-32 flex flex-col justify-center items-center">
-                  <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{achievement.number}</div>
-                  <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line text-center">{achievement.label}</div>
+            {/* Main Card - Currently Working */}
+            <motion.div 
+              variants={fadeInUp}
+              className="lg:col-span-2 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-8 border border-blue-200/50 dark:border-blue-800/50 hover:shadow-xl transition-all duration-300"
+            >
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center">
+                  <Rocket className="w-6 h-6 text-white" />
                 </div>
-              </motion.div>
-            ))}
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Currently Working</h3>
+                  <p className="text-gray-600 dark:text-gray-300">Building the future, one line at a time</p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3 p-4 bg-white/50 dark:bg-gray-800/50 rounded-xl backdrop-blur-sm">
+                  <Calendar className="w-5 h-5 text-blue-500 mt-1" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900 dark:text-white">Innovative Web Applications</h4>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">Focusing on React, TypeScript, and cutting-edge technologies</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3 p-4 bg-white/50 dark:bg-gray-800/50 rounded-xl backdrop-blur-sm">
+                  <Brain className="w-5 h-5 text-purple-500 mt-1" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900 dark:text-white">Advanced Development Patterns</h4>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">Exploring microservices, cloud architecture, and AI integration</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3 p-4 bg-white/50 dark:bg-gray-800/50 rounded-xl backdrop-blur-sm">
+                  <Target className="w-5 h-5 text-green-500 mt-1" />
+                  <div>
+                    <h4 className="font-semibold text-gray-900 dark:text-white">Open to Opportunities</h4>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">Looking for exciting projects and meaningful collaborations</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Skills Overview */}
+            <motion.div 
+              variants={fadeInUp}
+              className="bg-gradient-to-br from-purple-50 to-pink-100 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl p-8 border border-purple-200/50 dark:border-purple-800/50 hover:shadow-xl transition-all duration-300"
+            >
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center">
+                  <Cpu className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Core Skills</h3>
+                  <p className="text-gray-600 dark:text-gray-300">Technical expertise</p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">15+</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-300">Technologies</div>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 text-center backdrop-blur-sm">
+                    <div className="text-lg font-semibold text-gray-900 dark:text-white">Frontend</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-300">React, TypeScript</div>
+                  </div>
+                  <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 text-center backdrop-blur-sm">
+                    <div className="text-lg font-semibold text-gray-900 dark:text-white">Backend</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-300">Node.js, PHP</div>
+                  </div>
+                  <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 text-center backdrop-blur-sm">
+                    <div className="text-lg font-semibold text-gray-900 dark:text-white">Mobile</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-300">Flutter, Dart</div>
+                  </div>
+                  <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 text-center backdrop-blur-sm">
+                    <div className="text-lg font-semibold text-gray-900 dark:text-white">Design</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-300">Figma, UI/UX</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Achievements */}
+            <motion.div 
+              variants={fadeInUp}
+              className="lg:col-span-3 grid grid-cols-2 lg:grid-cols-4 gap-6"
+            >
+              {achievements.map((achievement, index) => (
+                <motion.div 
+                  key={index} 
+                  variants={fadeInUp}
+                  className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 rounded-2xl p-6 border border-gray-200/50 dark:border-gray-600/50 hover:shadow-lg transition-all duration-300 hover:scale-105"
+                >
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{achievement.number}</div>
+                    <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line">{achievement.label}</div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* Passion Card */}
+            <motion.div 
+              variants={fadeInUp}
+              className="lg:col-span-2 bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-8 border border-green-200/50 dark:border-green-800/50 hover:shadow-xl transition-all duration-300"
+            >
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center">
+                  <Heart className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">What Drives Me</h3>
+                  <p className="text-gray-600 dark:text-gray-300">Beyond just code</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-4 backdrop-blur-sm">
+                  <div className="flex items-center space-x-3 mb-3">
+                    <Lightbulb className="w-5 h-5 text-yellow-500" />
+                    <h4 className="font-semibold text-gray-900 dark:text-white">Innovation</h4>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">Creating solutions that make a real difference</p>
+                </div>
+                <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-4 backdrop-blur-sm">
+                  <div className="flex items-center space-x-3 mb-3">
+                    <Users className="w-5 h-5 text-blue-500" />
+                    <h4 className="font-semibold text-gray-900 dark:text-white">Collaboration</h4>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">Building amazing products with amazing people</p>
+                </div>
+                <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-4 backdrop-blur-sm">
+                  <div className="flex items-center space-x-3 mb-3">
+                    <TrendingUp className="w-5 h-5 text-green-500" />
+                    <h4 className="font-semibold text-gray-900 dark:text-white">Growth</h4>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">Always learning and pushing boundaries</p>
+                </div>
+                <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-4 backdrop-blur-sm">
+                  <div className="flex items-center space-x-3 mb-3">
+                    <Star className="w-5 h-5 text-purple-500" />
+                    <h4 className="font-semibold text-gray-900 dark:text-white">Excellence</h4>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">Delivering quality that exceeds expectations</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Fun Stats */}
+            <motion.div 
+              variants={fadeInUp}
+              className="bg-gradient-to-br from-orange-50 to-red-100 dark:from-orange-900/20 dark:to-red-900/20 rounded-2xl p-8 border border-orange-200/50 dark:border-orange-800/50 hover:shadow-xl transition-all duration-300"
+            >
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center">
+                  <Coffee className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Fun Facts</h3>
+                  <p className="text-gray-600 dark:text-gray-300">Life beyond coding</p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-orange-600 dark:text-orange-400 mb-1">500+</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-300">Cups of Coffee</div>
+                </div>
+                <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 backdrop-blur-sm">
+                  <div className="text-sm text-gray-600 dark:text-gray-300 text-center">
+                    <div className="font-semibold text-gray-900 dark:text-white mb-1">Caffeine Addict</div>
+                    <div>Fueling innovation one cup at a time</div>
+                  </div>
+                </div>
+                <div className="bg-white/50 dark:bg-gray-800/50 rounded-lg p-3 backdrop-blur-sm">
+                  <div className="text-sm text-gray-600 dark:text-gray-300 text-center">
+                    <div className="font-semibold text-gray-900 dark:text-white mb-1">Night Owl</div>
+                    <div>Best ideas come after midnight</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -526,39 +677,53 @@ const AllainPortfolio = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold mb-4">Tech Stack</h2>
+            <div className="flex items-center justify-center space-x-3 mb-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                <Layers className="w-6 h-6 text-white" />
+              </div>
+              <h2 className="text-4xl font-bold">Tech Stack</h2>
+            </div>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Technologies and tools I use to bring projects to life
+              Technologies and tools I use to bring projects to life. Each tool is carefully selected for its strengths and capabilities.
             </p>
           </motion.div>
           
+          {/* Tech Stack Grid */}
           <motion.div 
-            className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-9 gap-4"
+            className="max-w-6xl mx-auto"
             variants={stagger}
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
           >
-            {techStack.map((tech, index) => (
-              <motion.div 
-                key={index}
-                variants={fadeInUp}
-                whileHover={{ scale: 1.1 }}
-                className="group cursor-pointer"
-                title={tech.name}
-              >
-                <div className={`w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300 group-hover:scale-105`}>
-                  {tech.icon}
-                </div>
-              </motion.div>
-            ))}
+            <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 gap-6 justify-items-center">
+              {techStack.map((tech, index) => (
+                <motion.div 
+                  key={index}
+                  variants={fadeInUp}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  className="group cursor-pointer"
+                  title={tech.name}
+                >
+                  <div className="bg-card border rounded-2xl p-6 hover:shadow-lg transition-all duration-300 group-hover:shadow-xl w-20 h-20 flex items-center justify-center dark:bg-gray-800/50 dark:border-gray-700/50">
+                    <div className="w-12 h-12 flex items-center justify-center">
+                      {tech.icon}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* Projects Section */}
       <section id="projects" className="py-32 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
-        <div className="max-w-6xl mx-auto px-8">
+        <div className="max-w-7xl mx-auto px-8">
           <motion.div 
             className="text-center mb-24"
             initial={{ opacity: 0, y: 50 }}
@@ -566,14 +731,19 @@ const AllainPortfolio = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold mb-4">Featured Projects</h2>
+            <div className="flex items-center justify-center space-x-3 mb-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
+                <Sparkles className="w-6 h-6 text-white" />
+              </div>
+              <h2 className="text-4xl font-bold">Featured Projects</h2>
+            </div>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              A selection of my recent work showcasing different technologies and design approaches
+              A showcase of my recent work, demonstrating expertise across different technologies and creative solutions
             </p>
           </motion.div>
           
           <motion.div 
-            className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-12"
             variants={stagger}
             initial="initial"
             whileInView="animate"
@@ -581,12 +751,12 @@ const AllainPortfolio = () => {
           >
             {projects.map((project, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="h-full hover:shadow-2xl transition-all duration-300 group border-0 shadow-lg bg-white dark:bg-gray-700 rounded-2xl overflow-hidden">
+                <Card className="h-full hover:shadow-2xl transition-all duration-500 group border-0 shadow-lg bg-white dark:bg-gray-700 rounded-3xl overflow-hidden hover:scale-[1.02]">
                   <div className="relative overflow-hidden">
                     <img 
                       src={project.image} 
                       alt={project.title}
-                      className="w-full h-80 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-80 lg:h-96 object-cover group-hover:scale-110 transition-transform duration-700"
                       onError={(e) => {
                         const target = e.currentTarget as HTMLImageElement;
                         if (target.src !== '/assets/images/default.svg') {
@@ -594,41 +764,94 @@ const AllainPortfolio = () => {
                         }
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute top-8 left-8">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    
+                    {/* Status Badge */}
+                    <div className="absolute top-6 left-6">
                       <Badge 
                         variant="default"
-                        className="text-sm px-4 py-2 font-medium bg-gray-900/90 text-white hover:bg-gray-900 transition-colors cursor-pointer flex items-center gap-2"
-                        onClick={() => window.open(project.link, '_blank')}
+                        className={`text-sm px-4 py-2 font-medium transition-all duration-300 ${
+                          project.status === 'Employed' 
+                            ? 'bg-green-500/90 hover:bg-green-500 text-white' 
+                            : project.status === 'Live'
+                            ? 'bg-blue-500/90 hover:bg-blue-500 text-white'
+                            : 'bg-gray-500/90 hover:bg-gray-500 text-white'
+                        } backdrop-blur-sm`}
                       >
-                        <Github className="w-4 h-4" />
-                        GitHub
+                        <div className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse" />
+                        {project.status}
                       </Badge>
                     </div>
-                    <Button 
-                      size="sm" 
-                      className="absolute top-8 right-8 bg-white/95 text-gray-900 hover:bg-white opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg"
-                      onClick={() => window.open(project.link, '_blank')}
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                    </Button>
-                  </div>
-                  <CardHeader className="p-10">
-                    <div className="flex items-start justify-between mb-6">
-                      <CardTitle className="text-3xl font-bold leading-tight text-gray-900 dark:text-white">{project.title}</CardTitle>
-                      <span className="text-sm text-gray-500 dark:text-gray-400 font-medium bg-gray-100 dark:bg-gray-600 px-4 py-2 rounded-full">{project.year}</span>
+                    
+                    {/* Year Badge */}
+                    <div className="absolute top-6 right-6">
+                      <span className="text-sm text-white font-medium bg-black/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                        {project.year}
+                      </span>
                     </div>
-                    <CardDescription className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+                    
+                    {/* Action Buttons */}
+                    <div className="absolute bottom-6 left-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                      <div className="flex space-x-3">
+                        <Button 
+                          size="sm" 
+                          className="flex-1 bg-white/95 text-gray-900 hover:bg-white backdrop-blur-sm shadow-lg"
+                          onClick={() => window.open(project.link, '_blank')}
+                        >
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          View Project
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          variant="outline"
+                          className="bg-white/10 border-white/20 text-white hover:bg-white/20 backdrop-blur-sm"
+                          onClick={() => window.open(project.link, '_blank')}
+                        >
+                          <Github className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <CardHeader className="p-8">
+                    <div className="mb-6">
+                      <CardTitle className="text-2xl font-bold leading-tight text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        {project.title}
+                      </CardTitle>
+                      <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+                        <Calendar className="w-4 h-4" />
+                        <span>{project.year}</span>
+                        <span>•</span>
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          project.status === 'Employed' 
+                            ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' 
+                            : project.status === 'Live'
+                            ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
+                            : 'bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-400'
+                        }`}>
+                          {project.status}
+                        </span>
+                      </div>
+                    </div>
+                    <CardDescription className="text-base leading-relaxed text-gray-600 dark:text-gray-300">
                       {project.description}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="px-10 pb-10">
-                    <div className="flex flex-wrap gap-4">
-                      {project.tech.map((tech, techIndex) => (
-                        <Badge key={techIndex} variant="secondary" className="text-sm px-4 py-2 font-medium bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200">
-                          {tech}
-                        </Badge>
-                      ))}
+                  
+                  <CardContent className="px-8 pb-8">
+                    <div className="space-y-4">
+                      <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Technologies Used</h4>
+                      <div className="flex flex-wrap gap-3">
+                        {project.tech.map((tech, techIndex) => (
+                          <Badge 
+                            key={techIndex} 
+                            variant="secondary" 
+                            className="text-sm px-4 py-2 font-medium bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-600 dark:to-gray-700 text-gray-800 dark:text-gray-200 hover:shadow-md transition-all duration-300 hover:scale-105"
+                          >
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -648,164 +871,196 @@ const AllainPortfolio = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold mb-4">Let's Work Together</h2>
+            <div className="flex items-center justify-center space-x-3 mb-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-xl flex items-center justify-center">
+                <Mail className="w-6 h-6 text-white" />
+              </div>
+              <h2 className="text-4xl font-bold">Let's Work Together</h2>
+            </div>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Have a project in mind? I'd love to hear from you and discuss how we can bring your ideas to life.
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <Card className="p-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 transition-colors duration-300">
-                <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Send me a message</h3>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Contact Form */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <Card className="p-8 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 border-blue-200/50 dark:border-blue-800/50 hover:shadow-xl transition-all duration-300 rounded-3xl">
+                  <div className="flex items-center space-x-3 mb-6">
+                    <div className="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center">
+                      <Mail className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Send me a message</h3>
+                  </div>
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Name</label>
+                        <Input 
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          placeholder="Your name"
+                          className="bg-white/80 dark:bg-gray-800/80 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-800 transition-all duration-300"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Email</label>
+                        <Input 
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          placeholder="your@email.com"
+                          className="bg-white/80 dark:bg-gray-800/80 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-800 transition-all duration-300"
+                          required
+                        />
+                      </div>
+                    </div>
                     <div>
-                      <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Name</label>
+                      <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Subject</label>
                       <Input 
-                        name="name"
-                        value={formData.name}
+                        name="subject"
+                        value={formData.subject}
                         onChange={handleInputChange}
-                        placeholder="Your name"
-                        className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                        placeholder="Project discussion"
+                        className="bg-white/80 dark:bg-gray-800/80 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-800 transition-all duration-300"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Email</label>
-                      <Input 
-                        name="email"
-                        type="email"
-                        value={formData.email}
+                      <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Message</label>
+                      <Textarea 
+                        name="message"
+                        value={formData.message}
                         onChange={handleInputChange}
-                        placeholder="your@email.com"
-                        className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                        placeholder="Tell me about your project..."
+                        className="min-h-[120px] bg-white/80 dark:bg-gray-800/80 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-800 transition-all duration-300"
                         required
                       />
                     </div>
+                    <Button 
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white disabled:opacity-50 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl py-3"
+                    >
+                      {isSubmitting ? 'Opening Email Client...' : 'Send Message'}
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </form>
+                </Card>
+              </motion.div>
+              
+              {/* Right Column - Contact Info and Services */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="space-y-8"
+              >
+                {/* Get in touch Card */}
+                <Card className="p-8 bg-gradient-to-br from-purple-50 to-pink-100 dark:from-purple-900/20 dark:to-pink-900/20 border-purple-200/50 dark:border-purple-800/50 hover:shadow-xl transition-all duration-300 rounded-3xl">
+                  <div className="flex items-center space-x-3 mb-6">
+                    <div className="w-10 h-10 bg-purple-500 rounded-xl flex items-center justify-center">
+                      <Users className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Get in touch</h3>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Subject</label>
-                    <Input 
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      placeholder="Project discussion"
-                      className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
-                      required
-                    />
+                  <p className="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+                    I'm always open to discussing new opportunities, creative projects, or just having a chat about technology and design. Let's create something amazing together!
+                  </p>
+                  
+                  <div className="space-y-4">
+                    <a 
+                      href="mailto:allainralphlegaspi@gmail.com"
+                      className="flex items-center space-x-4 p-4 rounded-2xl hover:bg-white/50 dark:hover:bg-gray-800/50 transition-all duration-300 group backdrop-blur-sm"
+                    >
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <Mail className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <div className="font-semibold group-hover:text-blue-600 dark:group-hover:text-blue-400 text-gray-800 dark:text-gray-200 transition-colors">Email</div>
+                        <div className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">allainralphlegaspi@gmail.com</div>
+                      </div>
+                    </a>
+                    
+                    <a 
+                      href="https://github.com/Allain-afk"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-4 p-4 rounded-2xl hover:bg-white/50 dark:hover:bg-gray-800/50 transition-all duration-300 group backdrop-blur-sm"
+                    >
+                      <div className="w-12 h-12 bg-gradient-to-br from-gray-700 to-gray-900 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <Github className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <div className="font-semibold group-hover:text-gray-900 dark:group-hover:text-white text-gray-800 dark:text-gray-200 transition-colors">GitHub</div>
+                        <div className="text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">@Allain-afk</div>
+                      </div>
+                    </a>
+                    
+                    <a 
+                      href="https://www.linkedin.com/in/allain-afk"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-4 p-4 rounded-2xl hover:bg-white/50 dark:hover:bg-gray-800/50 transition-all duration-300 group backdrop-blur-sm"
+                    >
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <Linkedin className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <div className="font-semibold group-hover:text-blue-600 dark:group-hover:text-blue-400 text-gray-800 dark:text-gray-200 transition-colors">LinkedIn</div>
+                        <div className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">www.linkedin.com/in/allain-afk</div>
+                      </div>
+                    </a>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Message</label>
-                    <Textarea 
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      placeholder="Tell me about your project..."
-                      className="min-h-[120px] bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
-                      required
-                    />
-                  </div>
-                  <Button 
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-gray-900 hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 text-white dark:text-gray-900 disabled:opacity-50"
-                  >
-                    {isSubmitting ? 'Opening Email Client...' : 'Send Message'}
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </form>
-              </Card>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <div>
-                <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Get in touch</h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-8">
-                  I'm always open to discussing new opportunities, creative projects, or just having a chat about technology and design.
-                </p>
+                </Card>
                 
-                <div className="space-y-4">
-                  <a 
-                    href="mailto:allainralphlegaspi@gmail.com"
-                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 group"
-                  >
-                    <div className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center group-hover:bg-gray-200 dark:group-hover:bg-gray-600 transition-colors">
-                      <Mail className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                {/* Available for Card */}
+                <Card className="p-8 bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 border-green-200/50 dark:border-green-800/50 hover:shadow-xl transition-all duration-300 rounded-3xl">
+                  <div className="flex items-center space-x-3 mb-6">
+                    <div className="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center">
+                      <Zap className="w-5 h-5 text-white" />
                     </div>
-                    <div>
-                      <div className="font-medium group-hover:text-gray-900 dark:group-hover:text-white text-gray-800 dark:text-gray-200">Email</div>
-                      <div className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">allainralphlegaspi@gmail.com</div>
-                    </div>
-                  </a>
-                  
-                  <a 
-                    href="https://github.com/Allain-afk"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 group"
-                  >
-                    <div className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center group-hover:bg-gray-200 dark:group-hover:bg-gray-600 transition-colors">
-                      <Github className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-                    </div>
-                    <div>
-                      <div className="font-medium group-hover:text-gray-900 dark:group-hover:text-white text-gray-800 dark:text-gray-200">GitHub</div>
-                      <div className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">@Allain-afk</div>
-                    </div>
-                  </a>
-                  
-                  <a 
-                    href="https://www.linkedin.com/in/allain-afk"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 group"
-                  >
-                    <div className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center group-hover:bg-gray-200 dark:group-hover:bg-gray-600 transition-colors">
-                      <Linkedin className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-                    </div>
-                    <div>
-                      <div className="font-medium group-hover:text-gray-900 dark:group-hover:text-white text-gray-800 dark:text-gray-200">LinkedIn</div>
-                      <div className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">www.linkedin.com/in/allain-afk</div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              
-              <Separator className="bg-gray-200 dark:bg-gray-700" />
-              
-              <div>
-                <h4 className="font-semibold mb-4 text-gray-900 dark:text-white">Available for</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="flex items-center space-x-2">
-                    <Zap className="w-4 h-4 text-blue-500" />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">Web Development</span>
+                    <h4 className="text-xl font-bold text-gray-900 dark:text-white">Available for</h4>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <Smartphone className="w-4 h-4 text-green-500" />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">Mobile Apps</span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="flex items-center space-x-3 p-3 rounded-xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+                      <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+                        <Zap className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Web Development</span>
+                    </div>
+                    <div className="flex items-center space-x-3 p-3 rounded-xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+                      <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
+                        <Smartphone className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Mobile Apps</span>
+                    </div>
+                    <div className="flex items-center space-x-3 p-3 rounded-xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+                      <div className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center">
+                        <Palette className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">UI/UX Design</span>
+                    </div>
+                    <div className="flex items-center space-x-3 p-3 rounded-xl bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+                      <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+                        <Users className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Consulting</span>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <Palette className="w-4 h-4 text-purple-500" />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">UI/UX Design</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Users className="w-4 h-4 text-orange-500" />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">Consulting</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+                </Card>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -814,11 +1069,14 @@ const AllainPortfolio = () => {
       <footer className="bg-gray-900 dark:bg-gray-950 text-white py-12 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <div className="w-10 h-10 bg-white dark:bg-gray-200 rounded-full flex items-center justify-center p-2">
-                <img src="/code-icon.svg" alt="Code" className="w-full h-full" />
+            <div className="flex items-center space-x-3 mb-4 md:mb-0">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                <Code2 className="w-6 h-6 text-white" />
               </div>
-              <span className="font-bold text-xl">Allain</span>
+              <div className="flex flex-col">
+                <span className="font-bold text-xl text-white">Allain</span>
+                <span className="text-xs text-gray-400 font-medium">Full-Stack Developer</span>
+              </div>
             </div>
             
             <div className="text-center md:text-right">
