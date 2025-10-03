@@ -24,8 +24,6 @@ import {
   Sparkles,
   Target,
   TrendingUp,
-  Award,
-  Globe,
   Rocket,
   Star,
   Brain,

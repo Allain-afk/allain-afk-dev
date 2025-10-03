@@ -16,9 +16,21 @@ export default defineConfig({
     minify: 'esbuild',
     rollupOptions: {
       output: {
-        manualChunks: undefined,
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          ui: ['@radix-ui/react-slot', 'lucide-react'],
+          motion: ['framer-motion'],
+        },
       },
     },
   },
   base: '/',
+  server: {
+    port: 3000,
+    host: true,
+  },
+  preview: {
+    port: 3000,
+    host: true,
+  },
 }) 
